@@ -1,3 +1,8 @@
-.nav button {
-  display: block;
+.nav {
+  button {
+    /* Butondan sonra buton geliyorsa yani ilk butonda üstten 8px boşluk yok! */
+    & + button {
+      margin-top: 8px;
+    }
+  }
 }
