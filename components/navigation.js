@@ -1,60 +1,33 @@
 import React from "react";
 
-import NavigationButton from "./navigation-button";
-import TitleBold from "./title-bold";
+import { useRouter } from "next/router";
 
-import {
-  Twitter,
-  Home,
-  Explore,
-  Notification,
-  Messages,
-  Bookmark,
-  Lists,
-  Profile,
-  More,
-} from "./icons";
-
+import { MENU } from "../constants";
 import styles from "./navigation.module.css";
 
-function Navigation({ selectedKey }) {
+import NavigationButton from "./navigation-button";
+import TextTitle from "./text-title";
+
+function Navigation({ flat = false }) {
+  const router = useRouter();
   return (
     <nav className={styles.nav}>
-      <NavigationButton>
-        <Twitter />
-      </NavigationButton>
-      <NavigationButton selected={selectedKey === "home"}>
-        <Home />
-        <TitleBold>Home</TitleBold>
-      </NavigationButton>
-      <NavigationButton selected={selectedKey === "explore"}>
-        <Explore />
-        <TitleBold>Explore</TitleBold>
-      </NavigationButton>
-      <NavigationButton notify={15} selected={selectedKey === "notification"}>
-        <Notification />
-        <TitleBold>Notification</TitleBold>
-      </NavigationButton>
-      <NavigationButton selected={selectedKey === "messages"}>
-        <Messages />
-        <TitleBold>Messages</TitleBold>
-      </NavigationButton>
-      <NavigationButton selected={selectedKey === "bookmark"}>
-        <Bookmark />
-        <TitleBold>Bookmark</TitleBold>
-      </NavigationButton>
-      <NavigationButton selected={selectedKey === "lists"}>
-        <Lists />
-        <TitleBold>Lists</TitleBold>
-      </NavigationButton>
-      <NavigationButton selected={selectedKey === "profile"}>
-        <Profile />
-        <TitleBold>Profile</TitleBold>
-      </NavigationButton>
-      <NavigationButton selected={selectedKey === "more"}>
-        <More />
-        <TitleBold>More</TitleBold>
-      </NavigationButton>
+      {MENU.map((menu) => {
+        const showTitle = !flat && menu.title.length > 0;
+        const selected = router.pathname === menu.path;
+        return (
+          <NavigationButton
+            key={menu.key}
+            notify={menu.notify}
+            selected={selected}
+            href={menu.path}
+            className={styles.navButton}
+          >
+            {selected ? menu.iconSelected : menu.icon}
+            {showTitle && <TextTitle>{menu.title}</TextTitle>}
+          </NavigationButton>
+        );
+      })}
     </nav>
   );
 }

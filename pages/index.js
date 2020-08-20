@@ -1,14 +1,9 @@
 import React from "react";
-import Button from "../components/button";
 
+import Layout from "../components/layout";
 
 function HomePage() {
-  return (
-    <div>
-      <h1>Welcome to Next.js!</h1>
-      <Button>Merhaba</Button>
-    </div>
-  );
+  return <Layout>Anasayfa</Layout>;
 }
 
 export default HomePage;

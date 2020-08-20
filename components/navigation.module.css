@@ -1,8 +1,12 @@
 .nav {
-  button {
-    /* Butondan sonra buton geliyorsa yani ilk butonda üstten 8px boşluk yok! */
-    & + button {
-      margin-top: 8px;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navButton {
+  /* Butondan sonra buton geliyorsa yani ilk butonda üstten 8px boşluk yok! */
+  & + & {
+    margin-top: 8px;
   }
 }
